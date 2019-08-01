@@ -7,6 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.idonans.lang.CharLengthInputFilter;
+import com.idonans.lang.RegexInputFilter;
 import com.idonans.lang.manager.AppIDManager;
 import com.idonans.lang.manager.TmpFileManager;
 import com.idonans.lang.thread.Threads;
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         Threads.mustUi();
 
         EditText edit = findViewById(R.id.edit);
-        edit.setFilters(new InputFilter[]{new CharLengthInputFilter(10) {
+        edit.setFilters(new InputFilter[]{
+                new RegexInputFilter("[^\\r\\n]*")
+                , new CharLengthInputFilter(10) {
             @Override
             protected void onInputOverflow() {
                 Timber.v("onInputOverflow");
