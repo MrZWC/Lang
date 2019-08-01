@@ -1,9 +1,12 @@
 package com.idonans.example.lang;
 
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.idonans.lang.CharLengthInputFilter;
 import com.idonans.lang.manager.AppIDManager;
 import com.idonans.lang.manager.TmpFileManager;
 import com.idonans.lang.thread.Threads;
@@ -27,5 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         Threads.mustMainProcess();
         Threads.mustUi();
+
+        EditText edit = findViewById(R.id.edit);
+        edit.setFilters(new InputFilter[]{new CharLengthInputFilter(10) {
+            @Override
+            protected void onInputOverflow() {
+                Timber.v("onInputOverflow");
+            }
+        }});
     }
 }
