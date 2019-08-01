@@ -3,6 +3,6 @@ Android lang
 
 ```groovy
 
-    implementation 'com.idonans.lang:lang:0.1.0'
+    implementation 'com.idonans.lang:lang:0.1.4'
 
 ```
