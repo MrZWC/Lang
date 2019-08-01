@@ -38,5 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 Timber.v("onInputOverflow");
             }
         }});
+        edit.setText("中文字符中文字符");
     }
 }
