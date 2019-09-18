@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.View;
+import android.view.ViewParent;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
@@ -130,6 +131,24 @@ public class ViewUtil {
             return true;
         }
         return false;
+    }
+
+    public static boolean requestParentDisallowInterceptTouchEvent(View view) {
+        return requestParentDisallowInterceptTouchEvent(view, true);
+    }
+
+    public static boolean requestParentDisallowInterceptTouchEvent(View view, boolean disallowIntercept) {
+        if (view == null) {
+            Timber.e("view is null");
+            return false;
+        }
+        ViewParent viewParent = view.getParent();
+        if (viewParent == null) {
+            Timber.e("view parent is null");
+            return false;
+        }
+        viewParent.requestDisallowInterceptTouchEvent(disallowIntercept);
+        return true;
     }
 
 }
