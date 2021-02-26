@@ -33,7 +33,7 @@ dependencies {
     api rootProject.ext.bcfg.deps.guava
     api rootProject.ext.bcfg.deps.gson
     api rootProject.ext.bcfg.deps.timber
-    api rootProject.ext.bcfg.deps.rxbinding2
+    api rootProject.ext.bcfg.deps.rxbinding4
     api rootProject.ext.bcfg.deps.okhttp
 }
 
