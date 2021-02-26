@@ -35,6 +35,7 @@ dependencies {
     api rootProject.ext.bcfg.deps.timber
     api rootProject.ext.bcfg.deps.rxbinding4
     api rootProject.ext.bcfg.deps.okhttp
+    api rootProject.ext.bcfg.deps.rxjava2
 }
 
 // apply from: ('bintray.gradle')
