@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
-import com.idonans.lang.manager.StorageManager;
-import com.idonans.lang.thread.TaskQueue;
+import com.idonans.core.manager.StorageManager;
+import com.idonans.core.thread.TaskQueue;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.Callable;

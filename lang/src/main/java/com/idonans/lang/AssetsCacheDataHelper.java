@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
-import com.idonans.lang.util.AssetUtil;
+import com.idonans.core.util.AssetUtil;
 
 import java.lang.reflect.Type;
 

@@ -3,15 +3,5 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application>
-        <provider
-            android:name=".CommonFileProvider"
-            android:authorities="______${applicationId}.CommonFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/______file_provider" />
-        </provider>
-    </application>
+    <application></application>
 </manifest>

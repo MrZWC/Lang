@@ -9,9 +9,9 @@ import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.idonans.core.db.SimpleDB;
 import com.idonans.lang.LibLog;
 import com.idonans.lang.Singleton;
-import com.idonans.lang.db.SimpleDB;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
