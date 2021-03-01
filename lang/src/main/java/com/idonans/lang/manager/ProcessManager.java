@@ -5,12 +5,11 @@ import android.content.Context;
 import android.os.Binder;
 import android.text.TextUtils;
 
+import com.idonans.lang.LibLog;
 import com.idonans.lang.Singleton;
 import com.idonans.lang.util.ContextUtil;
 
 import java.util.List;
-
-import timber.log.Timber;
 
 /**
  * 记录进程信息，在 app 中可能存在多个进程，在处理如缓存路径时进程之间的应当不同，否则可能出现读写冲突。
@@ -43,7 +42,7 @@ public class ProcessManager {
     private boolean mMainProcess;
 
     private ProcessManager() {
-        Timber.v("init");
+        LibLog.v("init");
         mProcessId = android.os.Process.myPid();
         mProcessName = fetchProcessName();
 
@@ -68,7 +67,7 @@ public class ProcessManager {
             mProcessTag = "sub_" + processSuffix;
         }
 
-        Timber.v("process tag:%s, id:%s, name:%s", mProcessTag, mProcessId, mProcessName);
+        LibLog.v("process tag:%s, id:%s, name:%s", mProcessTag, mProcessId, mProcessName);
     }
 
     private String fetchProcessName() {
@@ -92,7 +91,7 @@ public class ProcessManager {
                 Binder.getCallingPid(),
                 Binder.getCallingUid(),
                 processInfos.size());
-        Timber.e("fallback process name %s", fallback);
+        LibLog.e("fallback process name %s", fallback);
         return fallback;
     }
 

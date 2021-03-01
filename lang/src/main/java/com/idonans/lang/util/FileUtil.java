@@ -10,12 +10,11 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.idonans.lang.CommonFileProvider;
+import com.idonans.lang.LibLog;
 import com.idonans.lang.manager.ProcessManager;
 
 import java.io.File;
 import java.io.IOException;
-
-import timber.log.Timber;
 
 /**
  * 文件操作相关辅助类
@@ -32,18 +31,18 @@ public class FileUtil {
     @Nullable
     public static File getAppMediaDir() {
         if (!PermissionUtil.hasExternalStoragePermission()) {
-            Timber.e("permission required");
+            LibLog.e("permission required");
             return null;
         }
 
         File rootDir = Environment.getExternalStorageDirectory();
         if (rootDir == null) {
-            Timber.e("Environment.getExternalStorageDirectory() return null");
+            LibLog.e("Environment.getExternalStorageDirectory() return null");
             return null;
         }
         String mediaDirName = getMediaDirName();
         if (TextUtils.isEmpty(mediaDirName)) {
-            Timber.e("mediaDirName is empty");
+            LibLog.e("mediaDirName is empty");
             return null;
         }
 
@@ -54,7 +53,7 @@ public class FileUtil {
 
         final boolean exists = targetDir.exists();
         final boolean notDirectory = !targetDir.isDirectory();
-        Timber.e("fail to init dir(getAppMediaDir) exists:%s, notDirectory:%s, path:%s", exists, notDirectory, targetDir.getPath());
+        LibLog.e("fail to init dir(getAppMediaDir) exists:%s, notDirectory:%s, path:%s", exists, notDirectory, targetDir.getPath());
         return null;
     }
 

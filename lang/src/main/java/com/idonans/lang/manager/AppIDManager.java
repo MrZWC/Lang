@@ -1,11 +1,10 @@
 package com.idonans.lang.manager;
 
 import com.idonans.lang.Constants;
+import com.idonans.lang.LibLog;
 import com.idonans.lang.Singleton;
 
 import java.util.UUID;
-
-import timber.log.Timber;
 
 /**
  * 不同进程的值不同. 进程重启之后值不会变更。但是如果应用程序卸载了或者清除了数据，值会变更。
@@ -28,13 +27,13 @@ public class AppIDManager {
     private String mAppID;
 
     private AppIDManager() {
-        Timber.v("init");
+        LibLog.v("init");
         mAppID = StorageManager.getInstance().getOrSetLock(
                 StorageManager.NAMESPACE_SETTING,
                 KEY_APP_ID,
                 UUID.randomUUID().toString());
 
-        Timber.v("AppID=%s", mAppID);
+        LibLog.v("AppID=%s", mAppID);
     }
 
     public String getAppID() {

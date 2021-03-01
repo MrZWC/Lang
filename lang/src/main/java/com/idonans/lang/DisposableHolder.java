@@ -1,7 +1,8 @@
 package com.idonans.lang;
 
 import androidx.annotation.Nullable;
-import io.reactivex.disposables.Disposable;
+
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class DisposableHolder {
 

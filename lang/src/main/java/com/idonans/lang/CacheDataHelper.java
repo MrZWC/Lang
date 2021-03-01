@@ -12,9 +12,9 @@ import com.idonans.lang.thread.TaskQueue;
 import java.lang.reflect.Type;
 import java.util.concurrent.Callable;
 
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CacheDataHelper<T> {
 
@@ -98,7 +98,7 @@ public class CacheDataHelper<T> {
                 .subscribe(
                         new Consumer<T>() {
                             @Override
-                            public void accept(@io.reactivex.annotations.NonNull T data)
+                            public void accept(T data)
                                     throws Exception {
                                 if (data != null) {
                                     setData(data);
@@ -107,7 +107,7 @@ public class CacheDataHelper<T> {
                         },
                         new Consumer<Throwable>() {
                             @Override
-                            public void accept(@io.reactivex.annotations.NonNull Throwable e) throws Exception {
+                            public void accept(Throwable e) throws Exception {
                                 // ignore
                             }
                         }));

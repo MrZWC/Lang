@@ -13,14 +13,15 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 
 import com.idonans.lang.Constants;
-import com.jakewharton.rxbinding2.view.RxView;
+import com.idonans.lang.LibLog;
+import com.jakewharton.rxbinding4.view.RxView;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import timber.log.Timber;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import kotlin.Unit;
 
 /**
  * View 相关辅助类
@@ -38,11 +39,11 @@ public class ViewUtil {
     @Nullable
     public static Disposable onClick(View view, long throttleMs, View.OnClickListener listener) {
         if (view == null) {
-            Timber.e("view is null");
+            LibLog.e("view is null");
             return null;
         }
 
-        Observable<Object> observable = RxView.clicks(view);
+        Observable<Unit> observable = RxView.clicks(view);
         if (throttleMs > 0) {
             observable = observable.throttleFirst(throttleMs, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread());
         }
@@ -59,12 +60,12 @@ public class ViewUtil {
     @Nullable
     public static <T extends View> T findViewById(View view, @IdRes int... ids) {
         if (view == null) {
-            Timber.e("view is null");
+            LibLog.e("view is null");
             return null;
         }
 
         if (ids == null || ids.length <= 0) {
-            Timber.e("invalid ids");
+            LibLog.e("invalid ids");
             return null;
         }
 
@@ -73,7 +74,7 @@ public class ViewUtil {
             targetView = targetView.findViewById(id);
 
             if (targetView == null) {
-                Timber.e("invalid id: %s", id);
+                LibLog.e("invalid id: %s", id);
                 return null;
             }
         }
@@ -105,7 +106,7 @@ public class ViewUtil {
 
     public static boolean setPaddingIfChanged(View view, int left, int top, int right, int bottom) {
         if (view == null) {
-            Timber.e("view is null");
+            LibLog.e("view is null");
             return false;
         }
 
@@ -122,7 +123,7 @@ public class ViewUtil {
 
     public static boolean setVisibilityIfChanged(View view, int visibility) {
         if (view == null) {
-            Timber.e("view is null");
+            LibLog.e("view is null");
             return false;
         }
 
@@ -139,12 +140,12 @@ public class ViewUtil {
 
     public static boolean requestParentDisallowInterceptTouchEvent(View view, boolean disallowIntercept) {
         if (view == null) {
-            Timber.e("view is null");
+            LibLog.e("view is null");
             return false;
         }
         ViewParent viewParent = view.getParent();
         if (viewParent == null) {
-            Timber.e("view parent is null");
+            LibLog.e("view parent is null");
             return false;
         }
         viewParent.requestDisallowInterceptTouchEvent(disallowIntercept);

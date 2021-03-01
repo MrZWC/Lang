@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.idonans.lang.Constants;
+import com.idonans.lang.LibLog;
 import com.idonans.lang.manager.ProcessManager;
 import com.idonans.lang.security.AES;
 import com.idonans.lang.util.ContextUtil;
@@ -17,8 +18,6 @@ import com.idonans.lang.util.IOUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import timber.log.Timber;
 
 /**
  * 基于 SQLite 模拟 KV 数据库. 不同的进程使用不同的数据库
@@ -46,7 +45,7 @@ public class SimpleDB {
      * 实现中会在数据库名前附加当前进程标识
      */
     public SimpleDB(@NonNull String databaseName) {
-        Timber.v("init");
+        LibLog.v("init");
         String dbName = Constants.GLOBAL_PREFIX + ProcessManager.getInstance().getProcessTag() + "_" + databaseName;
         mOpenHelper =
                 new SQLiteOpenHelper(ContextUtil.getContext(), dbName, null, DB_VERSION) {
@@ -273,7 +272,7 @@ public class SimpleDB {
             String dbName = this.mOpenHelper.getDatabaseName();
             String dbPath = db.getPath();
             String tag = dbPath + "[" + dbName + "]";
-            Timber.d("--" + tag + "--");
+            LibLog.d("--" + tag + "--");
             cursor =
                     db.query(
                             TABLE_NAME,
@@ -294,9 +293,9 @@ public class SimpleDB {
                 key = decodeKey(key);
                 value = decodeValue(value);
 
-                Timber.d(dbName + " " + update + ", " + key + ", " + value);
+                LibLog.d(dbName + " " + update + ", " + key + ", " + value);
             }
-            Timber.d("--" + tag + "-- end");
+            LibLog.d("--" + tag + "-- end");
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {

@@ -7,8 +7,11 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.bcfg.ver.min_sdk
         targetSdkVersion rootProject.ext.bcfg.ver.target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.bcfg.ver.versionCode
+        versionName rootProject.ext.bcfg.ver.versionName
+        buildConfigField("String", "LIB_NAME", "\"Lang\"")
+        buildConfigField("int", "LIB_VERSION_CODE", "$versionCode")
+        buildConfigField("String", "LIB_VERSION_NAME", "\"$versionName\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,10 +35,10 @@ dependencies {
     api rootProject.ext.bcfg.deps.androidx_appcompat
     api rootProject.ext.bcfg.deps.guava
     api rootProject.ext.bcfg.deps.gson
-    api rootProject.ext.bcfg.deps.timber
-    api rootProject.ext.bcfg.deps.rxbinding4
+    api rootProject.ext.bcfg.deps.rxbinding
     api rootProject.ext.bcfg.deps.okhttp
-    api rootProject.ext.bcfg.deps.rxjava2
+    api rootProject.ext.bcfg.deps.rxjava
+    api rootProject.ext.bcfg.deps.rxandroid
 }
 
 // apply from: ('bintray.gradle')

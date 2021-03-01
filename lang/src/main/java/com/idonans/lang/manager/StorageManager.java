@@ -5,13 +5,12 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.idonans.lang.Constants;
+import com.idonans.lang.LibLog;
 import com.idonans.lang.Singleton;
 import com.idonans.lang.db.SimpleDB;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import timber.log.Timber;
 
 /**
  * 不支持跨进程，不同进程所在存储空间不同
@@ -38,7 +37,7 @@ public class StorageManager {
     private final Object mGetOrSetLock = new Object();
 
     private StorageManager() {
-        Timber.v("init");
+        LibLog.v("init");
     }
 
     public void set(String namespace, String key, String value) {

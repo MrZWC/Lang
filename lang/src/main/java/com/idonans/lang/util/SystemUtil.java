@@ -12,9 +12,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
 
-import java.io.File;
+import com.idonans.lang.LibLog;
 
-import timber.log.Timber;
+import java.io.File;
 
 /**
  * 一些系统相关辅助类
@@ -121,7 +121,7 @@ public class SystemUtil {
             return true;
         } catch (Throwable e) {
             e.printStackTrace();
-            Timber.e(new Throwable("fail add to media store " + file, e));
+            LibLog.e(new Throwable("fail add to media store " + file, e));
         }
         return false;
     }

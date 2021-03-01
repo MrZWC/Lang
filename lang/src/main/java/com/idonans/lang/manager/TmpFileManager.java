@@ -3,6 +3,7 @@ package com.idonans.lang.manager;
 import androidx.annotation.Nullable;
 
 import com.idonans.lang.Constants;
+import com.idonans.lang.LibLog;
 import com.idonans.lang.Singleton;
 import com.idonans.lang.thread.TaskQueue;
 import com.idonans.lang.thread.Threads;
@@ -10,8 +11,6 @@ import com.idonans.lang.util.FileUtil;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import timber.log.Timber;
 
 /**
  * 临时文件管理器, 对于过期的临时文件会自动删除. 不同进程所使用的文件路径不同。
@@ -46,7 +45,7 @@ public class TmpFileManager {
     private static final int MAX_CLEAR_RETRY_COUNT = 5;
 
     private TmpFileManager() {
-        Timber.v("init");
+        LibLog.v("init");
         clear();
     }
 
@@ -73,7 +72,7 @@ public class TmpFileManager {
 
     private void clear(final int retry) {
         if (retry > MAX_CLEAR_RETRY_COUNT) {
-            Timber.e("retry %s times, abort.", retry);
+            LibLog.e("retry %s times, abort.", retry);
             return;
         }
 
@@ -85,7 +84,7 @@ public class TmpFileManager {
                     @Override
                     public void run() {
                         if (mClearQueue.getWaitCount() > 0) {
-                            Timber.d("has other task for clear, ignore this.");
+                            LibLog.d("has other task for clear, ignore this.");
                             return;
                         }
 
@@ -94,10 +93,10 @@ public class TmpFileManager {
                             public void run() {
                                 try {
                                     clearInternal();
-                                    Timber.d("clear success");
+                                    LibLog.d("clear success");
                                 } catch (Throwable e) {
                                     e.printStackTrace();
-                                    Timber.e("exception happen dur clear, retry later");
+                                    LibLog.e("exception happen dur clear, retry later");
                                     clear(retry + 1);
                                 }
                             }
@@ -112,11 +111,11 @@ public class TmpFileManager {
      * 清除过期临时文件
      */
     private void clearInternal() throws Throwable {
-        Timber.v("start clearInternal");
+        LibLog.v("start clearInternal");
 
         File tmpFileDir = getTmpFileDir();
         if (tmpFileDir == null || !tmpFileDir.exists()) {
-            Timber.v("clear tmp file dir not found %s", tmpFileDir);
+            LibLog.v("clear tmp file dir not found %s", tmpFileDir);
             return;
         }
 
@@ -132,14 +131,14 @@ public class TmpFileManager {
             }
 
             if (!file.isFile()) {
-                Timber.w("tmp file is not a file %s", file.getCanonicalPath());
+                LibLog.w("tmp file is not a file %s", file.getCanonicalPath());
             }
 
             if (file.lastModified() + MAX_AGE < System.currentTimeMillis()) {
-                Timber.v("remove expire tmp file %s", file);
+                LibLog.v("remove expire tmp file %s", file);
                 if (!FileUtil.deleteFileQuietly(file)) {
                     failToRemoveSize++;
-                    Timber.e("fail to remove expire tmp file %s", file);
+                    LibLog.e("fail to remove expire tmp file %s", file);
                 }
             }
         }
