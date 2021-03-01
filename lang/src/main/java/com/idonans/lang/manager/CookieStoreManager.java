@@ -9,9 +9,9 @@ import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.idonans.core.Singleton;
 import com.idonans.core.db.SimpleDB;
 import com.idonans.lang.LibLog;
-import com.idonans.lang.Singleton;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import okhttp3.HttpUrl;
  */
 public class CookieStoreManager {
 
-    private static final Singleton<CookieStoreManager> sInstance =
+    private static final Singleton<CookieStoreManager> INSTANCE =
             new Singleton<CookieStoreManager>() {
                 @Override
                 protected CookieStoreManager create() {
@@ -36,7 +36,7 @@ public class CookieStoreManager {
             };
 
     public static CookieStoreManager getInstance() {
-        return sInstance.get();
+        return INSTANCE.get();
     }
 
     private final Gson mGson = new Gson();
