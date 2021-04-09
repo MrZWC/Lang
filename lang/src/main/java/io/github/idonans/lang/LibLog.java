@@ -1,4 +1,4 @@
-package com.idonans.lang;
+package io.github.idonans.lang;
 
 import android.util.Log;
 

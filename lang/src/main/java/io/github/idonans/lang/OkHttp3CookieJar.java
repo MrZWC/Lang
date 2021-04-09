@@ -1,11 +1,10 @@
-package com.idonans.lang;
-
-import com.idonans.lang.manager.CookieStoreManager;
+package io.github.idonans.lang;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.github.idonans.lang.manager.CookieStoreManager;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;

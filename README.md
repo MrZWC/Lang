@@ -2,6 +2,6 @@
 
 ```groovy
 
-    implementation 'com.idonans.lang:lang:$latestVersion'
+    implementation 'io.io.github.idonans.lang:lang:$latestVersion'
 
 ```

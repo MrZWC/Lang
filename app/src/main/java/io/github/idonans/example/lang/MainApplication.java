@@ -1,4 +1,4 @@
-package com.idonans.example.lang;
+package io.github.idonans.example.lang;
 
 import android.app.Application;
 

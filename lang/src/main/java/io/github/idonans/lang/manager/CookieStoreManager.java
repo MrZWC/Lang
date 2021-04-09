@@ -1,4 +1,4 @@
-package com.idonans.lang.manager;
+package io.github.idonans.lang.manager;
 
 import android.text.TextUtils;
 
@@ -9,9 +9,6 @@ import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.idonans.core.Singleton;
-import com.idonans.core.db.SimpleDB;
-import com.idonans.lang.LibLog;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -19,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.github.idonans.core.Singleton;
+import io.github.idonans.core.db.SimpleDB;
+import io.github.idonans.lang.LibLog;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 

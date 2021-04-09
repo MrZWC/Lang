@@ -1,4 +1,4 @@
-package com.idonans.lang;
+package io.github.idonans.lang;
 
 import androidx.annotation.Nullable;
 

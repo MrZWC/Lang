@@ -1,8 +1,10 @@
-package com.idonans.example.lang;
+package io.github.idonans.example.lang;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.idonans.example.lang.R;
 
 public class MainActivity extends AppCompatActivity {
 

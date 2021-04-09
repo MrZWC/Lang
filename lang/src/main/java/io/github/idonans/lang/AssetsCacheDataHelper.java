@@ -1,13 +1,14 @@
-package com.idonans.lang;
+package io.github.idonans.lang;
 
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
-import com.idonans.core.util.AssetUtil;
 
 import java.lang.reflect.Type;
+
+import io.github.idonans.core.util.AssetUtil;
 
 public class AssetsCacheDataHelper<T> extends CacheDataHelper<T> {
 

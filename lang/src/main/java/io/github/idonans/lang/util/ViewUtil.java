@@ -1,4 +1,4 @@
-package com.idonans.lang.util;
+package io.github.idonans.lang.util;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 
-import com.idonans.lang.Constants;
-import com.idonans.lang.LibLog;
 import com.jakewharton.rxbinding4.view.RxView;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.idonans.lang.Constants;
+import io.github.idonans.lang.LibLog;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
