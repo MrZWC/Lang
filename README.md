@@ -1,7 +1,10 @@
-[ ![Download](https://api.bintray.com/packages/idonans/maven/lang/images/download.svg) ](https://bintray.com/idonans/maven/lang/_latestVersion)
+Lang
+====
+
+Releases
+--------
+The latest release is available on [![Maven Central](https://img.shields.io/maven-central/v/io.github.idonans.lang/lang.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.idonans.lang/lang)
 
 ```groovy
-
-    implementation 'io.io.github.idonans.lang:lang:$latestVersion'
-
+    implementation 'io.github.idonans.lang:lang:$latestVersion'
 ```
