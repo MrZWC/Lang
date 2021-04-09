@@ -18,7 +18,7 @@ import java.util.Map;
 
 import io.github.idonans.core.Singleton;
 import io.github.idonans.core.db.SimpleDB;
-import io.github.idonans.lang.LibLog;
+import io.github.idonans.lang.LangLog;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
@@ -48,7 +48,7 @@ public class CookieStoreManager {
     private final SimpleDB mStore;
 
     private CookieStoreManager() {
-        LibLog.v("init");
+        LangLog.v("init");
         mStore = new SimpleDB("cookie_store");
         mStore.trim(MAX_SIZE);
 
@@ -58,27 +58,27 @@ public class CookieStoreManager {
                 try {
                     CookieStoreEntity entity = mGson.fromJson(entry.getValue(), mCookieStoreEntityType);
                     if (entity == null) {
-                        LibLog.w("skip null entity %s -> %s", entry.getKey(), entry.getValue());
+                        LangLog.w("skip null entity %s -> %s", entry.getKey(), entry.getValue());
                         continue;
                     }
 
                     HttpUrl httpUrl = HttpUrl.parse(entity.url);
                     if (httpUrl == null) {
-                        LibLog.w("skip null httpUrl %s %s -> %s", entity.url, entry.getKey(), entry.getValue());
+                        LangLog.w("skip null httpUrl %s %s -> %s", entity.url, entry.getKey(), entry.getValue());
                         continue;
                     }
 
                     Cookie cookie = Cookie.parse(httpUrl, entity.setCookie);
                     if (cookie == null) {
-                        LibLog.w("skip null cookie %s %s -> %s", entity.setCookie, entry.getKey(), entry.getValue());
+                        LangLog.w("skip null cookie %s %s -> %s", entity.setCookie, entry.getKey(), entry.getValue());
                         continue;
                     }
                     if (!ObjectsCompat.equals(entry.getKey(), entity.savedKey)) {
-                        LibLog.w("skip key not equals %s : %s", entry.getKey(), entity.savedKey);
+                        LangLog.w("skip key not equals %s : %s", entry.getKey(), entity.savedKey);
                         continue;
                     }
                     if (deleteFromDBIfExpires(entity, cookie)) {
-                        LibLog.v("skip expires cookie %s -> %s", entry.getKey(), entry.getValue());
+                        LangLog.v("skip expires cookie %s -> %s", entry.getKey(), entry.getValue());
                         continue;
                     }
 
@@ -94,36 +94,36 @@ public class CookieStoreManager {
 
     public void save(String url, List<String> setCookies) {
         if (TextUtils.isEmpty(url)) {
-            LibLog.w("ignore save, url is empty");
+            LangLog.w("ignore save, url is empty");
             return;
         }
         if (setCookies == null || setCookies.isEmpty()) {
-            LibLog.w("ignore save, setCookies is empty");
+            LangLog.w("ignore save, setCookies is empty");
             return;
         }
 
         HttpUrl httpUrl = HttpUrl.parse(url);
         if (httpUrl == null) {
-            LibLog.w("ignore save, fail to parse url %s", url);
+            LangLog.w("ignore save, fail to parse url %s", url);
             return;
         }
 
         for (String setCookie : setCookies) {
             try {
                 if (TextUtils.isEmpty(setCookie)) {
-                    LibLog.w("ignore save, setCookie is empty");
+                    LangLog.w("ignore save, setCookie is empty");
                     continue;
                 }
 
                 Cookie cookie = Cookie.parse(httpUrl, setCookie);
                 if (cookie == null) {
-                    LibLog.w("ignore save, fail to parse cookie %s -> %s", httpUrl, setCookie);
+                    LangLog.w("ignore save, fail to parse cookie %s -> %s", httpUrl, setCookie);
                     continue;
                 }
 
                 CookieStoreEntity entity = CookieStoreEntity.valueOf(url, setCookie, cookie);
                 if (deleteFromDBIfExpires(entity, cookie)) {
-                    LibLog.w("ignore save, cookie expires %s -> %s", httpUrl, setCookie);
+                    LangLog.w("ignore save, cookie expires %s -> %s", httpUrl, setCookie);
                     continue;
                 }
 
@@ -245,7 +245,7 @@ public class CookieStoreManager {
 
     private boolean deleteFromDBIfExpires(CookieStoreEntity entity, Cookie cookie) {
         if (cookie.expiresAt() < System.currentTimeMillis()) {
-            LibLog.v("delete expires cookie %s -> %s", entity.savedKey, entity.setCookie);
+            LangLog.v("delete expires cookie %s -> %s", entity.savedKey, entity.setCookie);
             mStore.remove(entity.savedKey);
             return true;
         }
@@ -254,7 +254,7 @@ public class CookieStoreManager {
 
     private boolean deleteFromDBIfSession(CookieStoreEntity entity, Cookie cookie) {
         if (!cookie.persistent()) {
-            LibLog.v("delete session cookie %s -> %s", entity.savedKey, entity.setCookie);
+            LangLog.v("delete session cookie %s -> %s", entity.savedKey, entity.setCookie);
             mStore.remove(entity.savedKey);
             return true;
         }

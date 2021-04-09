@@ -17,7 +17,7 @@ import com.jakewharton.rxbinding4.view.RxView;
 import java.util.concurrent.TimeUnit;
 
 import io.github.idonans.lang.Constants;
-import io.github.idonans.lang.LibLog;
+import io.github.idonans.lang.LangLog;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -39,7 +39,7 @@ public class ViewUtil {
     @Nullable
     public static Disposable onClick(View view, long throttleMs, View.OnClickListener listener) {
         if (view == null) {
-            LibLog.e("view is null");
+            LangLog.e("view is null");
             return null;
         }
 
@@ -60,12 +60,12 @@ public class ViewUtil {
     @Nullable
     public static <T extends View> T findViewById(View view, @IdRes int... ids) {
         if (view == null) {
-            LibLog.e("view is null");
+            LangLog.e("view is null");
             return null;
         }
 
         if (ids == null || ids.length <= 0) {
-            LibLog.e("invalid ids");
+            LangLog.e("invalid ids");
             return null;
         }
 
@@ -74,7 +74,7 @@ public class ViewUtil {
             targetView = targetView.findViewById(id);
 
             if (targetView == null) {
-                LibLog.e("invalid id: %s", id);
+                LangLog.e("invalid id: %s", id);
                 return null;
             }
         }
@@ -106,7 +106,7 @@ public class ViewUtil {
 
     public static boolean setPaddingIfChanged(View view, int left, int top, int right, int bottom) {
         if (view == null) {
-            LibLog.e("view is null");
+            LangLog.e("view is null");
             return false;
         }
 
@@ -123,7 +123,7 @@ public class ViewUtil {
 
     public static boolean setVisibilityIfChanged(View view, int visibility) {
         if (view == null) {
-            LibLog.e("view is null");
+            LangLog.e("view is null");
             return false;
         }
 
@@ -140,12 +140,12 @@ public class ViewUtil {
 
     public static boolean requestParentDisallowInterceptTouchEvent(View view, boolean disallowIntercept) {
         if (view == null) {
-            LibLog.e("view is null");
+            LangLog.e("view is null");
             return false;
         }
         ViewParent viewParent = view.getParent();
         if (viewParent == null) {
-            LibLog.e("view parent is null");
+            LangLog.e("view parent is null");
             return false;
         }
         viewParent.requestDisallowInterceptTouchEvent(disallowIntercept);
