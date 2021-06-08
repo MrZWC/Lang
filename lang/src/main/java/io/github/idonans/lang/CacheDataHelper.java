@@ -13,7 +13,6 @@ import java.util.concurrent.Callable;
 import io.github.idonans.core.manager.StorageManager;
 import io.github.idonans.core.thread.TaskQueue;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CacheDataHelper<T> {
@@ -51,21 +50,18 @@ public class CacheDataHelper<T> {
 
     public void setData(@Nullable final T data) {
         mData = data;
-        mSaveQueue.enqueue(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String json;
-                    if (data == null) {
-                        json = null;
-                    } else {
-                        json = new Gson().toJson(data);
-                    }
-                    StorageManager.getInstance()
-                            .set(StorageManager.NAMESPACE_SETTING, mCacheKey, json);
-                } catch (Throwable e) {
-                    e.printStackTrace();
+        mSaveQueue.enqueue(() -> {
+            try {
+                String json;
+                if (data == null) {
+                    json = null;
+                } else {
+                    json = new Gson().toJson(data);
                 }
+                StorageManager.getInstance()
+                        .set(StorageManager.NAMESPACE_SETTING, mCacheKey, json);
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
         });
     }
@@ -75,7 +71,8 @@ public class CacheDataHelper<T> {
             @Override
             public void run() {
                 try {
-                    T data = cloneData;
+                    //noinspection UnnecessaryLocalVariable
+                    final T data = cloneData;
                     String json;
                     if (data == null) {
                         json = null;
@@ -92,28 +89,29 @@ public class CacheDataHelper<T> {
     }
 
     public void runSyncTask(@NonNull final Callable<T> callable) {
-        mSyncHolder.set(Single.fromCallable(callable)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(
-                        new Consumer<T>() {
-                            @Override
-                            public void accept(T data)
-                                    throws Exception {
-                                if (data != null) {
-                                    setData(data);
-                                }
+        mSyncHolder.set(
+                Single.just("")
+                        .map(input -> new ObjectRef<T>(callable.call()))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(input -> {
+                            if (input.object != null) {
+                                setData(input.object);
                             }
-                        },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable e) throws Exception {
-                                // ignore
-                            }
+                        }, e -> {
+                            // ignore
                         }));
     }
 
     protected final TaskQueue mSaveQueue = new TaskQueue(1);
     protected final DisposableHolder mSyncHolder = new DisposableHolder();
+
+    private static final class ObjectRef<T> {
+        final T object;
+
+        private ObjectRef(T object) {
+            this.object = object;
+        }
+    }
 
 }
