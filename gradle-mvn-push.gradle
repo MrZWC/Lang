@@ -32,8 +32,9 @@ afterEvaluate { project ->
 
                 if (POM_INCLUDE_SRC.toBoolean()) {
                     artifact sourcesJar
+                } else {
+                    artifact javadocsJar
                 }
-                artifact javadocsJar
 
                 pom {
                     name = POM_NAME
