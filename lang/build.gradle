@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.bcfg.ver.target_sdk
-    buildToolsVersion rootProject.ext.bcfg.ver.build_tools
 
     defaultConfig {
         minSdkVersion rootProject.ext.bcfg.ver.min_sdk
@@ -34,7 +33,7 @@ dependencies {
     api rootProject.ext.bcfg.deps.idonans_appcontext
     api rootProject.ext.bcfg.deps.idonans_core
     api rootProject.ext.bcfg.deps.androidx_appcompat
-    api rootProject.ext.bcfg.deps.guava
+    api rootProject.ext.bcfg.deps.guava_android
     api rootProject.ext.bcfg.deps.gson
     api rootProject.ext.bcfg.deps.rxbinding
     api rootProject.ext.bcfg.deps.okhttp

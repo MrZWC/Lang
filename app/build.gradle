@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.bcfg.ver.target_sdk
-    buildToolsVersion rootProject.ext.bcfg.ver.build_tools
 
     defaultConfig {
         applicationId "io.github.idonans.example.lang"
