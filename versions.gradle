@@ -6,7 +6,7 @@ bcfg.ver = [:]
 bcfg.ver.min_sdk = 21
 bcfg.ver.target_sdk = 31
 bcfg.ver.versionCode = ext.createGitVersionCode()
-bcfg.ver.versionName = "2.0.12"
+bcfg.ver.versionName = "2.0.13"
 
 bcfg.deps = [:]
 bcfg.deps.android_gradle_plugin = "com.android.tools.build:gradle:7.0.3"
@@ -44,7 +44,7 @@ bcfg.deps.fresco_support_webp = "com.facebook.fresco:webpsupport:2.4.0"
 bcfg.deps.fresco_okhttp = "com.facebook.fresco:imagepipeline-okhttp3:2.4.0"
 
 bcfg.deps.idonans_appcontext = "io.github.idonans.appcontext:appcontext:2.2.4"
-bcfg.deps.idonans_core = "io.github.MrZWC:core:2.0.19"
+bcfg.deps.idonans_core = "io.github.MrZWC:core:2.0.20"
 bcfg.deps.idonans_lang = "io.github.idonans.lang:lang:2.0.11"
 bcfg.deps.idonans_systeminsets = "io.github.idonans.systeminsets:systeminsets:2.0.3"
 bcfg.deps.idonans_backstack = "io.github.idonans.backstack:backstack:2.0.2"
